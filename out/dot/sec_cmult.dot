@@ -1,0 +1,29 @@
+digraph {
+	graph [fontname = Arial, margin = 0, dpi = 600]
+	mul_ar_bi [label = "{{ArithNode}|id = mul_ar_bi\nop = mul\nwidth = 36}", fontname = Arial, shape = Mrecord]
+	add_mul_ai_br_mul_ar_bi [label = "{{ArithNode}|id = add_mul_ai_br_mul_ar_bi\nop = add\nwidth = 36}", fontname = Arial, shape = Mrecord]
+	mul_ai_br [label = "{{ArithNode}|id = mul_ai_br\nop = mul\nwidth = 36}", fontname = Arial, shape = Mrecord]
+	mul_ar_br -> sub_mul_ar_br_mul_ai_bi
+	ai -> mul_ai_bi
+	ai [label = "{{StrmNode}|id = ai\ntype = input\nwidth = 20}", fontname = Arial, shape = Mrecord]
+	sub_mul_ar_br_mul_ai_bi -> cr
+	add_mul_ai_br_mul_ar_bi -> ci
+	sub_mul_ar_br_mul_ai_bi [label = "{{ArithNode}|id = sub_mul_ar_br_mul_ai_bi\nop = sub\nwidth = 36}", fontname = Arial, shape = Mrecord]
+	br -> mul_ai_br
+	ar [label = "{{StrmNode}|id = ar\ntype = input\nwidth = 20}", fontname = Arial, shape = Mrecord]
+	bi [label = "{{StrmNode}|id = bi\ntype = input\nwidth = 16}", fontname = Arial, shape = Mrecord]
+	mul_ai_bi [label = "{{ArithNode}|id = mul_ai_bi\nop = mul\nwidth = 36}", fontname = Arial, shape = Mrecord]
+	mul_ar_bi -> add_mul_ai_br_mul_ar_bi
+	bi -> mul_ar_bi
+	br -> mul_ar_br
+	ar -> mul_ar_bi
+	bi -> mul_ai_bi
+	ar -> mul_ar_br
+	cr [label = "{{StrmNode}|id = cr\ntype = output\nwidth = 36}", fontname = Arial, shape = Mrecord]
+	mul_ai_br -> add_mul_ai_br_mul_ar_bi
+	ai -> mul_ai_br
+	br [label = "{{StrmNode}|id = br\ntype = input\nwidth = 16}", fontname = Arial, shape = Mrecord]
+	ci [label = "{{StrmNode}|id = ci\ntype = output\nwidth = 36}", fontname = Arial, shape = Mrecord]
+	mul_ar_br [label = "{{ArithNode}|id = mul_ar_br\nop = mul\nwidth = 36}", fontname = Arial, shape = Mrecord]
+	mul_ai_bi -> sub_mul_ar_br_mul_ai_bi
+}

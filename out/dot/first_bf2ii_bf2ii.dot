@@ -1,0 +1,52 @@
+digraph {
+	graph [fontname = Arial, margin = 0, dpi = 600]
+	and_s_not_t -> first_bf2ii_MUXsg_Inst
+	zfr_mux [label = "{{TmplNode}|id = zfr_mux\ngenerics # = 1\ninputs # = 3\noutputs # = 1}", fontname = Arial, shape = Mrecord]
+	first_bf2ii_MUXsg_Inst -> zfi_mux
+	xfr -> znr_mux
+	first_bf2ii_MUXim_Inst [label = "{{CompNode}|id = first_bf2ii_MUXim_Inst\ngenerics # = 3\ninputs # = 0\noutputs # = 3}", fontname = Arial, shape = Mrecord]
+	zfi_mux [label = "{{TmplNode}|id = zfi_mux\ngenerics # = 1\ninputs # = 3\noutputs # = 1}", fontname = Arial, shape = Mrecord]
+	xfr [label = "{{StrmNode}|id = xfr\ntype = input\nwidth = 18}", fontname = Arial, shape = Mrecord]
+	s -> zfr_mux
+	first_bf2ii_MUXim_Inst -> add_d08act
+	zni_mux [label = "{{TmplNode}|id = zni_mux\ngenerics # = 1\ninputs # = 3\noutputs # = 1}", fontname = Arial, shape = Mrecord]
+	add_d08act [label = "{{ArithNode}|id = add_d08act\nop = add\nwidth = 18}", fontname = Arial, shape = Mrecord]
+	zfr_mux -> zfr
+	xpi [label = "{{StrmNode}|id = xpi\ntype = input\nwidth = 17}", fontname = Arial, shape = Mrecord]
+	s [label = "{{StrmNode}|id = s\ntype = input\nwidth = 1}", fontname = Arial, shape = Mrecord]
+	xfi [label = "{{StrmNode}|id = xfi\ntype = input\nwidth = 18}", fontname = Arial, shape = Mrecord]
+	t -> not_t
+	first_bf2ii_MUXsg_Inst -> zni_mux
+	xfi -> first_bf2ii_MUXsg_Inst
+	t [label = "{{StrmNode}|id = t\ntype = input\nwidth = 1}", fontname = Arial, shape = Mrecord]
+	zfi [label = "{{StrmNode}|id = zfi\ntype = output\nwidth = 18}", fontname = Arial, shape = Mrecord]
+	xpr [label = "{{StrmNode}|id = xpr\ntype = input\nwidth = 17}", fontname = Arial, shape = Mrecord]
+	xpi -> first_bf2ii_MUXim_Inst
+	xfr -> add_d08act
+	s -> znr_mux
+	zfr [label = "{{StrmNode}|id = zfr\ntype = output\nwidth = 18}", fontname = Arial, shape = Mrecord]
+	sub_t941xo [label = "{{ArithNode}|id = sub_t941xo\nop = sub\nwidth = 18}", fontname = Arial, shape = Mrecord]
+	s -> zni_mux
+	znr_mux -> znr
+	zni [label = "{{StrmNode}|id = zni\ntype = output\nwidth = 18}", fontname = Arial, shape = Mrecord]
+	first_bf2ii_MUXim_Inst -> zfr_mux
+	znr [label = "{{StrmNode}|id = znr\ntype = output\nwidth = 18}", fontname = Arial, shape = Mrecord]
+	zni_mux -> zni
+	s -> and_s_not_t
+	first_bf2ii_MUXim_Inst -> first_bf2ii_MUXsg_Inst
+	and_s_not_t [label = "{{LogiNode}|id = and_s_not_t\nop = and\nwidth = 1}", fontname = Arial, shape = Mrecord]
+	and_s_not_t -> first_bf2ii_MUXim_Inst
+	first_bf2ii_MUXsg_Inst [label = "{{CompNode}|id = first_bf2ii_MUXsg_Inst\ngenerics # = 3\ninputs # = 0\noutputs # = 3}", fontname = Arial, shape = Mrecord]
+	first_bf2ii_MUXim_Inst -> zfi_mux
+	sub_t941xo -> zfr_mux
+	s -> zfi_mux
+	xfi -> zni_mux
+	first_bf2ii_MUXim_Inst -> sub_t941xo
+	add_d08act -> znr_mux
+	not_t [label = "{{LogiNode}|id = not_t\nop = not\nwidth = 1}", fontname = Arial, shape = Mrecord]
+	zfi_mux -> zfi
+	xfr -> sub_t941xo
+	znr_mux [label = "{{TmplNode}|id = znr_mux\ngenerics # = 1\ninputs # = 3\noutputs # = 1}", fontname = Arial, shape = Mrecord]
+	not_t -> and_s_not_t
+	xpr -> first_bf2ii_MUXim_Inst
+}

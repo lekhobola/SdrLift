@@ -1,0 +1,20 @@
+digraph {
+	graph [fontname = Arial, margin = 0, dpi = 600]
+	first_bf2ii_MUXsg_MUXim_Inst -> zni
+	zni [label = "{{StrmNode}|id = zni\ntype = output\nwidth = 18}", fontname = Arial, shape = Mrecord]
+	first_bf2ii_MUXsg_MUXim_Inst -> znr
+	add_g1_g2 -> first_bf2ii_MUXsg_MUXim_Inst
+	znr [label = "{{StrmNode}|id = znr\ntype = output\nwidth = 18}", fontname = Arial, shape = Mrecord]
+	g2 -> add_g1_g2
+	g1 [label = "{{StrmNode}|id = g1\ntype = input\nwidth = 18}", fontname = Arial, shape = Mrecord]
+	g2 [label = "{{StrmNode}|id = g2\ntype = input\nwidth = 18}", fontname = Arial, shape = Mrecord]
+	sub_g1_g2 [label = "{{ArithNode}|id = sub_g1_g2\nop = sub\nwidth = 18}", fontname = Arial, shape = Mrecord]
+	sub_g1_g2 -> first_bf2ii_MUXsg_MUXim_Inst
+	g1 -> add_g1_g2
+	cc [label = "{{StrmNode}|id = cc\ntype = input\nwidth = 1}", fontname = Arial, shape = Mrecord]
+	g1 -> sub_g1_g2
+	cc -> first_bf2ii_MUXsg_MUXim_Inst
+	g2 -> sub_g1_g2
+	first_bf2ii_MUXsg_MUXim_Inst [label = "{{CompNode}|id = first_bf2ii_MUXsg_MUXim_Inst\ngenerics # = 3\ninputs # = 0\noutputs # = 3}", fontname = Arial, shape = Mrecord]
+	add_g1_g2 [label = "{{ArithNode}|id = add_g1_g2\nop = add\nwidth = 18}", fontname = Arial, shape = Mrecord]
+}

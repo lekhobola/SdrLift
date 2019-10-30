@@ -1,0 +1,46 @@
+digraph {
+	graph [fontname = Arial, margin = 0, dpi = 600]
+	sec_bf2i -> sec_bf2i_sreg_i
+	sec -> sec_cmultr
+	en -> sec_bf2i_sreg_r
+	sec -> sec_cmulti
+	sec_bf2i [label = "{{CompNode}|id = sec_bf2i\ngenerics # = 5\ninputs # = 0\noutputs # = 5}", fontname = Arial, shape = Mrecord]
+	sec_bf2i_sreg_r -> sec_bf2i
+	dinr [label = "{{StrmNode}|id = dinr\ntype = input\nwidth = 18}", fontname = Arial, shape = Mrecord]
+	en -> sec_bf2ii_sreg_r
+	sec_cmultr [label = "{{TmplNode}|id = sec_cmultr\ngenerics # = 2\ninputs # = 1\noutputs # = 1}", fontname = Arial, shape = Mrecord]
+	sec_bf2ii_sreg_r -> sec_bf2ii
+	tfr -> sec
+	sec_bf2i -> sec_bf2i_sreg_r
+	sec_cmultr -> doutr
+	en [label = "{{StrmNode}|id = en\ntype = input\nwidth = 1}", fontname = Arial, shape = Mrecord]
+	sec_bf2ii [label = "{{CompNode}|id = sec_bf2ii\ngenerics # = 6\ninputs # = 0\noutputs # = 5}", fontname = Arial, shape = Mrecord]
+	sec_bf2ii_sreg_r [label = "{{TmplNode}|id = sec_bf2ii_sreg_r\ngenerics # = 2\ninputs # = 4\noutputs # = 2}", fontname = Arial, shape = Mrecord]
+	dini -> sec_bf2i
+	sec_cmulti -> douti
+	sec_bf2ii -> sec_bf2ii_sreg_r
+	sec_bf2ii -> sec
+	s1 -> sec_bf2i
+	sec_bf2i -> sec_bf2ii
+	sec_bf2ii_sreg_i [label = "{{TmplNode}|id = sec_bf2ii_sreg_i\ngenerics # = 2\ninputs # = 4\noutputs # = 2}", fontname = Arial, shape = Mrecord]
+	dinr -> sec_bf2i
+	tfr [label = "{{StrmNode}|id = tfr\ntype = input\nwidth = 16}", fontname = Arial, shape = Mrecord]
+	s2 [label = "{{StrmNode}|id = s2\ntype = input\nwidth = 1}", fontname = Arial, shape = Mrecord]
+	en -> sec_bf2ii_sreg_i
+	tfi -> sec
+	en -> sec_bf2i_sreg_i
+	sec [label = "{{CompNode}|id = sec\ngenerics # = 4\ninputs # = 0\noutputs # = 3}", fontname = Arial, shape = Mrecord]
+	sec_bf2i_sreg_i [label = "{{TmplNode}|id = sec_bf2i_sreg_i\ngenerics # = 2\ninputs # = 4\noutputs # = 2}", fontname = Arial, shape = Mrecord]
+	doutr [label = "{{StrmNode}|id = doutr\ntype = output\nwidth = 20}", fontname = Arial, shape = Mrecord]
+	sec_bf2ii -> sec_bf2ii_sreg_i
+	s1 [label = "{{StrmNode}|id = s1\ntype = input\nwidth = 1}", fontname = Arial, shape = Mrecord]
+	tfi [label = "{{StrmNode}|id = tfi\ntype = input\nwidth = 16}", fontname = Arial, shape = Mrecord]
+	sec_bf2ii_sreg_i -> sec_bf2ii
+	sec_bf2i_sreg_r [label = "{{TmplNode}|id = sec_bf2i_sreg_r\ngenerics # = 2\ninputs # = 4\noutputs # = 2}", fontname = Arial, shape = Mrecord]
+	s1 -> sec_bf2ii
+	douti [label = "{{StrmNode}|id = douti\ntype = output\nwidth = 20}", fontname = Arial, shape = Mrecord]
+	sec_bf2i_sreg_i -> sec_bf2i
+	sec_cmulti [label = "{{TmplNode}|id = sec_cmulti\ngenerics # = 2\ninputs # = 1\noutputs # = 1}", fontname = Arial, shape = Mrecord]
+	s2 -> sec_bf2ii
+	dini [label = "{{StrmNode}|id = dini\ntype = input\nwidth = 18}", fontname = Arial, shape = Mrecord]
+}

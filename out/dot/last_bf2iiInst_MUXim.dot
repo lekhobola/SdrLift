@@ -1,0 +1,18 @@
+digraph {
+	graph [fontname = Arial, margin = 0, dpi = 600]
+	cc -> zr_mux
+	zr_mux -> zr
+	zi_mux [label = "{{TmplNode}|id = zi_mux\ngenerics # = 1\ninputs # = 3\noutputs # = 1}", fontname = Arial, shape = Mrecord]
+	zr_mux [label = "{{TmplNode}|id = zr_mux\ngenerics # = 1\ninputs # = 3\noutputs # = 1}", fontname = Arial, shape = Mrecord]
+	bi -> zi_mux
+	bi [label = "{{StrmNode}|id = bi\ntype = input\nwidth = 21}", fontname = Arial, shape = Mrecord]
+	bi -> zr_mux
+	zr [label = "{{StrmNode}|id = zr\ntype = output\nwidth = 21}", fontname = Arial, shape = Mrecord]
+	cc -> zi_mux
+	zi [label = "{{StrmNode}|id = zi\ntype = output\nwidth = 21}", fontname = Arial, shape = Mrecord]
+	cc [label = "{{StrmNode}|id = cc\ntype = input\nwidth = 1}", fontname = Arial, shape = Mrecord]
+	br -> zi_mux
+	zi_mux -> zi
+	br -> zr_mux
+	br [label = "{{StrmNode}|id = br\ntype = input\nwidth = 21}", fontname = Arial, shape = Mrecord]
+}

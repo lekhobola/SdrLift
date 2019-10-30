@@ -1,0 +1,44 @@
+digraph {
+	graph [fontname = Arial, margin = 0, dpi = 600]
+	xpr [label = "{{StrmNode}|id = xpr\ntype = input\nwidth = 20}", fontname = Arial, shape = Mrecord]
+	zfr_mux [label = "{{TmplNode}|id = zfr_mux\ngenerics # = 1\ninputs # = 3\noutputs # = 1}", fontname = Arial, shape = Mrecord]
+	xpr -> zfr_mux
+	xfr -> znr_mux
+	zni [label = "{{StrmNode}|id = zni\ntype = output\nwidth = 21}", fontname = Arial, shape = Mrecord]
+	xfr -> sub_xfr_xpr
+	add_xfi_xpi -> zni_mux
+	xpi [label = "{{StrmNode}|id = xpi\ntype = input\nwidth = 20}", fontname = Arial, shape = Mrecord]
+	xpr -> sub_xfr_xpr
+	zfi_mux [label = "{{TmplNode}|id = zfi_mux\ngenerics # = 1\ninputs # = 3\noutputs # = 1}", fontname = Arial, shape = Mrecord]
+	sub_xfr_xpr -> zfr_mux
+	xpi -> sub_xfi_xpi
+	s -> zfr_mux
+	znr [label = "{{StrmNode}|id = znr\ntype = output\nwidth = 21}", fontname = Arial, shape = Mrecord]
+	zni_mux [label = "{{TmplNode}|id = zni_mux\ngenerics # = 1\ninputs # = 3\noutputs # = 1}", fontname = Arial, shape = Mrecord]
+	zfr_mux -> zfr
+	s [label = "{{StrmNode}|id = s\ntype = input\nwidth = 1}", fontname = Arial, shape = Mrecord]
+	sub_xfi_xpi -> zfi_mux
+	xpr -> add_xfr_xpr
+	xfi -> add_xfi_xpi
+	xfi -> sub_xfi_xpi
+	xpi -> add_xfi_xpi
+	s -> znr_mux
+	add_xfi_xpi [label = "{{ArithNode}|id = add_xfi_xpi\nop = add\nwidth = 21}", fontname = Arial, shape = Mrecord]
+	xfr -> add_xfr_xpr
+	add_xfr_xpr [label = "{{ArithNode}|id = add_xfr_xpr\nop = add\nwidth = 21}", fontname = Arial, shape = Mrecord]
+	s -> zni_mux
+	znr_mux -> znr
+	zni_mux -> zni
+	xfr [label = "{{StrmNode}|id = xfr\ntype = input\nwidth = 21}", fontname = Arial, shape = Mrecord]
+	zfr [label = "{{StrmNode}|id = zfr\ntype = output\nwidth = 21}", fontname = Arial, shape = Mrecord]
+	sub_xfr_xpr [label = "{{ArithNode}|id = sub_xfr_xpr\nop = sub\nwidth = 21}", fontname = Arial, shape = Mrecord]
+	zfi [label = "{{StrmNode}|id = zfi\ntype = output\nwidth = 21}", fontname = Arial, shape = Mrecord]
+	s -> zfi_mux
+	add_xfr_xpr -> znr_mux
+	xfi -> zni_mux
+	xfi [label = "{{StrmNode}|id = xfi\ntype = input\nwidth = 21}", fontname = Arial, shape = Mrecord]
+	zfi_mux -> zfi
+	znr_mux [label = "{{TmplNode}|id = znr_mux\ngenerics # = 1\ninputs # = 3\noutputs # = 1}", fontname = Arial, shape = Mrecord]
+	sub_xfi_xpi [label = "{{ArithNode}|id = sub_xfi_xpi\nop = sub\nwidth = 21}", fontname = Arial, shape = Mrecord]
+	xpi -> zfi_mux
+}

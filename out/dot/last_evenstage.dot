@@ -1,0 +1,36 @@
+digraph {
+	graph [fontname = Arial, margin = 0, dpi = 600]
+	last_bf2iiInst -> doutr
+	last_bf2i_sreg_r [label = "{{TmplNode}|id = last_bf2i_sreg_r\ngenerics # = 2\ninputs # = 4\noutputs # = 2}", fontname = Arial, shape = Mrecord]
+	last_bf2ii_sreg_r -> last_bf2iiInst
+	douti [label = "{{StrmNode}|id = douti\ntype = output\nwidth = 22}", fontname = Arial, shape = Mrecord]
+	last_bf2i_sreg_r -> last_bf2i
+	s1 -> last_bf2i
+	last_bf2i [label = "{{CompNode}|id = last_bf2i\ngenerics # = 5\ninputs # = 0\noutputs # = 5}", fontname = Arial, shape = Mrecord]
+	last_bf2ii_sreg_i [label = "{{TmplNode}|id = last_bf2ii_sreg_i\ngenerics # = 2\ninputs # = 4\noutputs # = 2}", fontname = Arial, shape = Mrecord]
+	en -> last_bf2i_sreg_r
+	last_bf2i_sreg_i -> last_bf2i
+	last_bf2ii_sreg_i -> last_bf2iiInst
+	en [label = "{{StrmNode}|id = en\ntype = input\nwidth = 1}", fontname = Arial, shape = Mrecord]
+	en -> last_bf2ii_sreg_r
+	dinr [label = "{{StrmNode}|id = dinr\ntype = input\nwidth = 20}", fontname = Arial, shape = Mrecord]
+	last_bf2iiInst [label = "{{CompNode}|id = last_bf2iiInst\ngenerics # = 6\ninputs # = 0\noutputs # = 5}", fontname = Arial, shape = Mrecord]
+	en -> last_bf2i_sreg_i
+	dini [label = "{{StrmNode}|id = dini\ntype = input\nwidth = 20}", fontname = Arial, shape = Mrecord]
+	s2 [label = "{{StrmNode}|id = s2\ntype = input\nwidth = 1}", fontname = Arial, shape = Mrecord]
+	s2 -> last_bf2iiInst
+	doutr [label = "{{StrmNode}|id = doutr\ntype = output\nwidth = 22}", fontname = Arial, shape = Mrecord]
+	dinr -> last_bf2i
+	last_bf2iiInst -> douti
+	s1 [label = "{{StrmNode}|id = s1\ntype = input\nwidth = 1}", fontname = Arial, shape = Mrecord]
+	last_bf2ii_sreg_r [label = "{{TmplNode}|id = last_bf2ii_sreg_r\ngenerics # = 2\ninputs # = 4\noutputs # = 2}", fontname = Arial, shape = Mrecord]
+	last_bf2i -> last_bf2i_sreg_i
+	last_bf2iiInst -> last_bf2ii_sreg_r
+	last_bf2i -> last_bf2i_sreg_r
+	last_bf2i -> last_bf2iiInst
+	dini -> last_bf2i
+	s1 -> last_bf2iiInst
+	last_bf2i_sreg_i [label = "{{TmplNode}|id = last_bf2i_sreg_i\ngenerics # = 2\ninputs # = 4\noutputs # = 2}", fontname = Arial, shape = Mrecord]
+	last_bf2iiInst -> last_bf2ii_sreg_i
+	en -> last_bf2ii_sreg_i
+}

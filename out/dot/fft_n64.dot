@@ -1,0 +1,37 @@
+digraph {
+	graph [fontname = Arial, margin = 0, dpi = 600]
+	xnr -> first
+	stage1_twiddle_i [label = "{{TmplNode}|id = stage1_twiddle_i\ngenerics # = 2\ninputs # = 1\noutputs # = 1}", fontname = Arial, shape = Mrecord]
+	last -> xkr
+	xkr [label = "{{StrmNode}|id = xkr\ntype = output\nwidth = 22}", fontname = Arial, shape = Mrecord]
+	ctrl -> stage2_twiddle_i
+	stage2_twiddle_r [label = "{{TmplNode}|id = stage2_twiddle_r\ngenerics # = 2\ninputs # = 1\noutputs # = 1}", fontname = Arial, shape = Mrecord]
+	en -> last
+	stage1_twiddle_r -> first
+	sec -> last
+	en [label = "{{StrmNode}|id = en\ntype = input\nwidth = 1}", fontname = Arial, shape = Mrecord]
+	ctrl [label = "{{TmplNode}|id = ctrl\ngenerics # = 1\ninputs # = 3\noutputs # = 1}", fontname = Arial, shape = Mrecord]
+	xki [label = "{{StrmNode}|id = xki\ntype = output\nwidth = 22}", fontname = Arial, shape = Mrecord]
+	stage1_twiddle_i -> first
+	en -> sec
+	stage2_twiddle_i -> sec
+	xni -> first
+	ctrl -> stage1_twiddle_i
+	ctrl -> stage2_twiddle_r
+	stage2_twiddle_i [label = "{{TmplNode}|id = stage2_twiddle_i\ngenerics # = 2\ninputs # = 1\noutputs # = 1}", fontname = Arial, shape = Mrecord]
+	ctrl -> last
+	en -> first
+	ctrl -> first
+	last -> xki
+	xnr [label = "{{StrmNode}|id = xnr\ntype = input\nwidth = 16}", fontname = Arial, shape = Mrecord]
+	first -> sec
+	xni [label = "{{StrmNode}|id = xni\ntype = input\nwidth = 16}", fontname = Arial, shape = Mrecord]
+	ctrl -> sec
+	en -> ctrl
+	sec [label = "{{CompNode}|id = sec\ngenerics # = 9\ninputs # = 0\noutputs # = 3}", fontname = Arial, shape = Mrecord]
+	last [label = "{{CompNode}|id = last\ngenerics # = 7\ninputs # = 0\noutputs # = 3}", fontname = Arial, shape = Mrecord]
+	stage2_twiddle_r -> sec
+	ctrl -> stage1_twiddle_r
+	stage1_twiddle_r [label = "{{TmplNode}|id = stage1_twiddle_r\ngenerics # = 2\ninputs # = 1\noutputs # = 1}", fontname = Arial, shape = Mrecord]
+	first [label = "{{CompNode}|id = first\ngenerics # = 9\ninputs # = 0\noutputs # = 3}", fontname = Arial, shape = Mrecord]
+}

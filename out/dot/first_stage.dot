@@ -1,0 +1,46 @@
+digraph {
+	graph [fontname = Arial, margin = 0, dpi = 600]
+	first -> first_cmultr
+	first_bf2ii_sreg_r [label = "{{TmplNode}|id = first_bf2ii_sreg_r\ngenerics # = 2\ninputs # = 4\noutputs # = 2}", fontname = Arial, shape = Mrecord]
+	tfi -> first
+	first_bf2i -> first_bf2ii
+	first_cmulti -> douti
+	first_bf2i_sreg_i [label = "{{TmplNode}|id = first_bf2i_sreg_i\ngenerics # = 2\ninputs # = 4\noutputs # = 2}", fontname = Arial, shape = Mrecord]
+	first_cmulti [label = "{{TmplNode}|id = first_cmulti\ngenerics # = 2\ninputs # = 1\noutputs # = 1}", fontname = Arial, shape = Mrecord]
+	tfr -> first
+	first -> first_cmulti
+	first_bf2ii -> first
+	s1 -> first_bf2i
+	dinr -> first_bf2i
+	en [label = "{{StrmNode}|id = en\ntype = input\nwidth = 1}", fontname = Arial, shape = Mrecord]
+	douti [label = "{{StrmNode}|id = douti\ntype = output\nwidth = 18}", fontname = Arial, shape = Mrecord]
+	first_bf2ii -> first_bf2ii_sreg_r
+	first_bf2i [label = "{{CompNode}|id = first_bf2i\ngenerics # = 5\ninputs # = 0\noutputs # = 5}", fontname = Arial, shape = Mrecord]
+	dini -> first_bf2i
+	first_bf2i -> first_bf2i_sreg_i
+	dini [label = "{{StrmNode}|id = dini\ntype = input\nwidth = 16}", fontname = Arial, shape = Mrecord]
+	first_bf2ii_sreg_i -> first_bf2ii
+	first_bf2i -> first_bf2i_sreg_r
+	first_bf2ii -> first_bf2ii_sreg_i
+	tfr [label = "{{StrmNode}|id = tfr\ntype = input\nwidth = 16}", fontname = Arial, shape = Mrecord]
+	s2 [label = "{{StrmNode}|id = s2\ntype = input\nwidth = 1}", fontname = Arial, shape = Mrecord]
+	first_bf2ii_sreg_i [label = "{{TmplNode}|id = first_bf2ii_sreg_i\ngenerics # = 2\ninputs # = 4\noutputs # = 2}", fontname = Arial, shape = Mrecord]
+	en -> first_bf2ii_sreg_i
+	en -> first_bf2i_sreg_i
+	s1 [label = "{{StrmNode}|id = s1\ntype = input\nwidth = 1}", fontname = Arial, shape = Mrecord]
+	s2 -> first_bf2ii
+	first_cmultr -> doutr
+	tfi [label = "{{StrmNode}|id = tfi\ntype = input\nwidth = 16}", fontname = Arial, shape = Mrecord]
+	first_bf2i_sreg_i -> first_bf2i
+	s1 -> first_bf2ii
+	first_cmultr [label = "{{TmplNode}|id = first_cmultr\ngenerics # = 2\ninputs # = 1\noutputs # = 1}", fontname = Arial, shape = Mrecord]
+	dinr [label = "{{StrmNode}|id = dinr\ntype = input\nwidth = 16}", fontname = Arial, shape = Mrecord]
+	en -> first_bf2ii_sreg_r
+	first_bf2ii_sreg_r -> first_bf2ii
+	first_bf2i_sreg_r -> first_bf2i
+	first_bf2i_sreg_r [label = "{{TmplNode}|id = first_bf2i_sreg_r\ngenerics # = 2\ninputs # = 4\noutputs # = 2}", fontname = Arial, shape = Mrecord]
+	first_bf2ii [label = "{{CompNode}|id = first_bf2ii\ngenerics # = 6\ninputs # = 0\noutputs # = 5}", fontname = Arial, shape = Mrecord]
+	doutr [label = "{{StrmNode}|id = doutr\ntype = output\nwidth = 18}", fontname = Arial, shape = Mrecord]
+	first [label = "{{CompNode}|id = first\ngenerics # = 4\ninputs # = 0\noutputs # = 3}", fontname = Arial, shape = Mrecord]
+	en -> first_bf2i_sreg_r
+}
