@@ -6,7 +6,7 @@ import exp.KernelExp.Module
 import exp.NodeExp.Streamer
 import exp.PatternsExp.{Chain, FoldR, ZipWith}
 import scalax.collection.Graph
-import sdrlift.codegen.vhdl.{VhdlComponentCodeGen, VhdlKernelCodeGen}
+import sdrlift.graph.NodeFactory.PortTypeEnum
 import sdrlift.graph.{DfgEdge, DfgNode}
 
 import scala.collection.Seq
@@ -18,7 +18,7 @@ object FFT {
     // output nodes
     val (cr, ci) = (Streamer("cr", c_width), Streamer("ci", c_width))
 
-    override val iopaths = List((ar, cr))
+    override val iopaths = List((ar, cr), (ai, ci))
 
     // combinational logic
     val cmb = Combinational {
@@ -51,7 +51,7 @@ object FFT {
     // outputs
     val (znr, zni, zfr, zfi) = (Streamer("znr", w + 1), Streamer("zni", w + 1), Streamer("zfr", w + 1), Streamer("zfi", w + 1))
 
-    override val iopaths = List((xpr, znr))
+    override val iopaths = List((xpr, znr), (xpi, zni))
 
     val cmb = Combinational {
       val xfr_xpr_sum = xfr + xpr
@@ -91,7 +91,7 @@ object FFT {
     // outputs
     val (zr, zi) = (Streamer("zr", w), Streamer("zi", w))
 
-    override val iopaths = List((br, zr))
+    override val iopaths = List((br, zr), (bi, zi))
 
     val cmb = Combinational {
       val zr_mux = Mux2to1("zr_mux", w)
@@ -144,7 +144,7 @@ object FFT {
     // outputs
     val (znr, zni, zfr, zfi) = (Streamer("znr", w + 1), Streamer("zni", w + 1), Streamer("zfr", w + 1), Streamer("zfi", w + 1))
 
-    override val iopaths = List((xpr, znr))
+    override val iopaths = List((xpr, znr), (xpi, zni))
 
     val cmb = Combinational {
       val t_not = t !
@@ -194,7 +194,7 @@ object FFT {
     // outputs
     val (doutr, douti) = (Streamer("doutr", data_width + 2), Streamer("douti", data_width + 2))
 
-    override val iopaths = List((dinr, doutr))
+    override val iopaths = List((dinr, doutr), (dini, douti))
 
     val cmb = Combinational {
       // BF2I
@@ -248,7 +248,7 @@ object FFT {
     // outputs
     val (doutr, douti) = (Streamer("doutr", data_width + 1), Streamer("douti", data_width + 1))
 
-    override val iopaths = List((dinr, doutr))
+    override val iopaths = List((dinr, doutr), (dini, douti))
 
     val cmb = Combinational {
       // BF2I
@@ -277,7 +277,7 @@ object FFT {
     // outputs
     val (doutr, douti) = (Streamer("doutr", data_width + 2), Streamer("douti", data_width + 2))
 
-    override val iopaths = List((dinr, doutr))
+    override val iopaths = List((dinr, doutr), (dini, douti))
 
     val cmb = Combinational {
       // BF2I
@@ -319,7 +319,7 @@ object FFT {
     // outputs
     val (xkr, xki) = (Streamer("xkr", w + 3), Streamer("xki", w + 3))
 
-    override val iopaths = List((xnr, xkr))
+    override val iopaths = List((xnr, xkr), (xni, xki))
 
     //  val cmb = Combinational {
     // counter - fft controller
@@ -346,6 +346,8 @@ object FFT {
     override val name: String = "fft_n8"
     override val width: Int = w
     override val dfg = model(Seq(ctrl_comm, rom_r_comm, rom_i_comm, fs_comm, ls_comm))
+    override val input_length: Int = 8
+    override val output_length: Int = 8
   }
 
   /* val fft8 = FFT_N8("fft8", 16)
@@ -358,7 +360,7 @@ object FFT {
     // outputs
     val (xkr, xki) = (Streamer("xkr", w + 6), Streamer("xki", w + 6))
 
-    override val iopaths = List((xnr, xkr))
+    override val iopaths = List((xnr, xkr), (xni, xki))
 
     val cmb = Combinational {
       // counter - fft controller
@@ -395,15 +397,17 @@ object FFT {
     override val name: String = "fft_n64"
     override val width: Int = w
     override val dfg = model(Seq(cmb))
+
   }
 
   case class FFT_N64(inst: String, w: Int) extends Module {
     //inputs
-    val (en, xnr, xni) = (Streamer("en", 1), Streamer("xnr", w), Streamer("xni", w))
+    val (en, xnr, xni) = (Streamer("en", 1, PortTypeEnum.EN), Streamer("xnr", w, PortTypeEnum.DIN), Streamer("xni", w, PortTypeEnum.DIN))
     // outputs
-    val (xkr, xki) = (Streamer("xkr", w + 6), Streamer("xki", w + 6))
+    val (xkr, xki, vld) = (Streamer("xkr", w + 6, PortTypeEnum.DOUT), Streamer("xki", w + 6, PortTypeEnum.DOUT), Streamer("vld", 1, PortTypeEnum.VLD))
+    _ports = List(en, xnr, xni, xkr, xki, vld)
 
-    override val iopaths = List((xnr, xkr))
+    override val iopaths = List((xnr, xkr),(xni, xki))
 
     val fft = FFT64("fft64_Inst", w)
     val fft_comm = fft inLinks(en ~> (fft, fft.en), xnr ~> (fft, fft.xnr), xni ~> (fft, fft.xni)) outLinks((fft, fft.xkr) ~> xkr, (fft, fft.xki) ~> xki)
@@ -411,15 +415,18 @@ object FFT {
     override val name: String = fft.name
     override val width: Int = w
     override val dfg = fft.dfg
+    override val input_length: Int = 64
+    override val output_length: Int = 64
   }
 
   case class IFFT_N64(inst: String, w: Int) extends Module {
     //inputs
-    val (en, xnr, xni) = (Streamer("en", 1), Streamer("xnr", w), Streamer("xni", w))
+    val (en, xnr, xni) = (Streamer("en", 1, PortTypeEnum.EN), Streamer("xnr", w, PortTypeEnum.DIN), Streamer("xni", w, PortTypeEnum.DIN))
     // outputs
-    val (xkr, xki) = (Streamer("xkr", w + 6), Streamer("xki", w + 6))
+    val (xkr, xki, vld) = (Streamer("xkr", w + 6, PortTypeEnum.DOUT), Streamer("xki", w + 6, PortTypeEnum.DOUT), Streamer("vld", 1, PortTypeEnum.VLD))
+    _ports = List(en, xnr, xni, xkr, xki, vld)
 
-    override val iopaths = List((xnr, xkr))
+    override val iopaths = List((xnr, xkr),(xni, xki))
 
     val fft = FFT64("fft64_Inst", w)
     val fft_comm = fft inLinks(en ~> (fft, fft.en), xnr ~> (fft, fft.xni), xni ~> (fft, fft.xnr)) outLinks((fft, fft.xki) ~> xkr, (fft, fft.xkr) ~> xki)
@@ -427,15 +434,17 @@ object FFT {
     override val name: String = "ifft_n64"
     override val width: Int = w
     override val dfg = model(Seq(fft_comm))
+    override val input_length: Int = 64
+    override val output_length: Int = 64
   }
 
   case class FFT2048(inst: String, w: Int) extends Component {
     //inputs
     val (en, xnr, xni) = (Streamer("en", 1), Streamer("xnr", w), Streamer("xni", w))
     // outputs
-    val (xkr, xki) = (Streamer("xkr", w + 11), Streamer("xki", w + 11))
+    val (xkr, xki) = (Streamer("xkr", w + 11), Streamer("xki", w +11))
 
-    override val iopaths = List((xnr, xkr))
+    override val iopaths = List((xnr, xkr),(xni, xki))
 
     val cmb = Combinational {
       // counter - fft controller
@@ -506,11 +515,12 @@ object FFT {
 
   case class FFT_N2048(inst: String, w: Int) extends Module {
     //inputs
-    val (en, xnr, xni) = (Streamer("en", 1), Streamer("xnr", w), Streamer("xni", w))
+    val (en, xnr, xni) = (Streamer("en", 1, PortTypeEnum.EN), Streamer("xnr", w, PortTypeEnum.DIN), Streamer("xni", w, PortTypeEnum.DIN))
     // outputs
-    val (xkr, xki) = (Streamer("xkr", w + 11), Streamer("xki", w + 11))
+    val (xkr, xki, vld) = (Streamer("xkr", w + 11, PortTypeEnum.DOUT), Streamer("xki", w +11, PortTypeEnum.DOUT), Streamer("vld", 1, PortTypeEnum.VLD))
+    _ports = List(en, xnr, xni, xkr, xki, vld)
 
-    override val iopaths = List((xnr, xkr))
+    override val iopaths = List((xnr, xkr),(xni, xki))
 
     val fft = FFT2048("fft2048_Inst", w)
     val fft_comm = fft inLinks(en ~> (fft, fft.en), xnr ~> (fft, fft.xnr), xni ~> (fft, fft.xni)) outLinks((fft, fft.xkr) ~> xkr, (fft, fft.xki) ~> xki)
@@ -518,15 +528,18 @@ object FFT {
     override val name: String = fft.name
     override val width: Int = w
     override val dfg = fft.dfg
+    override val input_length: Int = 2048
+    override val output_length: Int = 2048
   }
 
   case class IFFT_N2048(inst: String, w: Int) extends Module {
     //inputs
-    val (en, xnr, xni) = (Streamer("en", 1), Streamer("xnr", w), Streamer("xni", w))
+    val (en, xnr, xni) = (Streamer("en", 1, PortTypeEnum.EN), Streamer("xnr", w, PortTypeEnum.DIN), Streamer("xni", w, PortTypeEnum.DIN))
     // outputs
-    val (xkr, xki) = (Streamer("xkr", w + 11), Streamer("xki", w + 11))
+    val (xkr, xki, vld) = (Streamer("xkr", w + 11, PortTypeEnum.DOUT), Streamer("xki", w +11, PortTypeEnum.DOUT), Streamer("vld", 1, PortTypeEnum.VLD))
+    _ports = List(en, xnr, xni, xkr, xki, vld)
 
-    override val iopaths = List((xnr, xkr))
+    override val iopaths = List((xnr, xkr),(xni, xki))
 
     val fft = FFT2048("fft2048_Inst", w)
     val fft_comm = fft inLinks(en ~> (fft, fft.en), xnr ~> (fft, fft.xni), xni ~> (fft, fft.xnr)) outLinks((fft, fft.xki) ~> xkr, (fft, fft.xkr) ~> xki)
@@ -534,5 +547,7 @@ object FFT {
     override val name: String = "ifft_n2048"
     override val width: Int = w
     override val dfg = model(Seq(fft_comm))
+    override val input_length: Int = 2048
+    override val output_length: Int = 2048
   }
 }

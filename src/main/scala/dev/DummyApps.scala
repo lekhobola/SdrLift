@@ -4,7 +4,6 @@ import de.upb.hni.vmagic.output.VhdlOutput
 import exp.CompExp.Delay
 import exp.KernelExp.Module
 import exp.PatternsExp.{Chain, FoldR, ZipWith}
-import sdrlift.codegen.vhdl.VhdlKernelCodeGen
 
 object DummyApps {
 

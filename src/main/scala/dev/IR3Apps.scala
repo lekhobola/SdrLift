@@ -5,6 +5,7 @@ import scalax.collection.Graph
 import sdrlift.model.{Actor, Channel}
 import Channel.ImplicitEdge
 import exp.KernelExp.KernelPort
+import sdrlift.graph.NodeFactory.ActorTypeEnum
 
 object IR3Apps {
 
@@ -32,12 +33,12 @@ object IR3Apps {
     cpParams.put("prefixLength", 16)
 
     val (source, qam, zeropad, ifft, cp, sink) = (
-      Actor("source", "sourceInst", null, 1),
-      Actor("qammod", "qamInst", null, 3),
-      Actor("zeropad", "zeropadInst", zeropadParams, 65),
-      Actor("r22sdf_fft_ifft_core", "ifftInst", ifftParams, 128),
-      Actor("cpadd", "cpInst", cpParams, 129),
-      Actor("sink", "sinkInst", null, 1))
+      Actor("source", "sourceInst", null, 1, null),
+      Actor("qammod", "qamInst", null, 3, null),
+      Actor("zeropad", "zeropadInst", zeropadParams, 65, null),
+      Actor("r22sdf_fft_ifft_core", "ifftInst", ifftParams, 128, null),
+      Actor("cpadd", "cpInst", cpParams, 129, null),
+      Actor("sink", "sinkInst", null, 1, null))
 
 
     //////////////////////////// LABELS  /////////////////////////////////
@@ -117,12 +118,12 @@ object IR3Apps {
     qamdemodParams.put("iWidth", 22)
     qamdemodParams.put("oWidth", 22)
 
-    val (source, cp, fft, zerocut, qamdemod, sink) = (Actor("source2", "sourceInst", sourceParams, 1),
-      Actor("cpremove", "cpInst", cpParams, 81),
-      Actor("r22sdf_fft_ifft_core", "fftInst", fftParams, 128),
-      Actor("zerocut", "zerocutInst", zerocutParams, 65),
-      Actor("qamdemod", "qamdemodInst", qamdemodParams, 3),
-      Actor("sink2", "sinkInst", null, 1))
+    val (source, cp, fft, zerocut, qamdemod, sink) = (Actor("source2", "sourceInst", sourceParams, 1, null),
+      Actor("cpremove", "cpInst", cpParams, 81, null),
+      Actor("r22sdf_fft_ifft_core", "fftInst", fftParams, 128, null),
+      Actor("zerocut", "zerocutInst", zerocutParams, 65, null),
+      Actor("qamdemod", "qamdemodInst", qamdemodParams, 3, null),
+      Actor("sink2", "sinkInst", null, 1, null))
 
 
     //////////////////////////// LABELS  /////////////////////////////////
@@ -197,12 +198,12 @@ object IR3Apps {
     sinkParams.put("dWidth", 16) //27
 
     val (source, qam, zeropad, ifft, cp, sink) = (
-      Actor("source", "sourceInst", null, 1),
-      Actor("qammod", "qamInst", null, 3),
-      Actor("zeropad", "zeropadInst", zeropadParams, 2049),
-      Actor("r22sdf_fft_ifft_core", "ifftInst", ifftParams, 4096),
-      Actor("cpadd", "cpInst", cpParams, 4097),
-      Actor("sink", "sinkInst", sinkParams, 1))
+      Actor("source", "sourceInst", null, 1, null),
+      Actor("qammod", "qamInst", null, 3, null),
+      Actor("zeropad", "zeropadInst", zeropadParams, 2049, null),
+      Actor("r22sdf_fft_ifft_core", "ifftInst", ifftParams, 4096, null),
+      Actor("cpadd", "cpInst", cpParams, 4097, null),
+      Actor("sink", "sinkInst", sinkParams, 1, null))
 
 
     //////////////////////////// LABELS  /////////////////////////////////
@@ -287,12 +288,12 @@ object IR3Apps {
     val sinkParams = new java.util.HashMap[String, Any]()
     sinkParams.put("dWidth", 16)
 
-    val (source, cp, fft, zerocut, qamdemod, sink) = (Actor("source2", "sourceInst", sourceParams, 1),
-      Actor("cpremove", "cpInst", cpParams, 2561),
-      Actor("r22sdf_fft_ifft_core", "fftInst", fftParams, 4096),
-      Actor("zerocut", "zerocutInst", zerocutParams, 2049),
-      Actor("qamdemod", "qamdemodInst", qamdemodParams, 3),
-      Actor("sink2", "sinkInst", sinkParams, 1))
+    val (source, cp, fft, zerocut, qamdemod, sink) = (Actor("source2", "sourceInst", sourceParams, 1, null),
+      Actor("cpremove", "cpInst", cpParams, 2561, null),
+      Actor("r22sdf_fft_ifft_core", "fftInst", fftParams, 4096, null),
+      Actor("zerocut", "zerocutInst", zerocutParams, 2049, null),
+      Actor("qamdemod", "qamdemodInst", qamdemodParams, 3, null),
+      Actor("sink2", "sinkInst", sinkParams, 1, null))
 
 
     //////////////////////////// LABELS  /////////////////////////////////
@@ -368,34 +369,34 @@ object IR3Apps {
     spParams.put("dWidth", 4)
 
     val (source, sp, qam1, zeropad1, ifft1, cp1, sink1) = (
-      Actor("source", "sourceInst1", null, 1),
-      Actor("sp", "spInst1", spParams, 240),
-      Actor("qammod", "qamInst1", null, 3),
-      Actor("zeropad", "zeropadInst1", zeropadParams, 65),
-      Actor("r22sdf_fft_ifft_core", "ifftInst1", ifftParams, 128),
-      Actor("cpadd", "cpInst1", cpParams, 129),
-      Actor("sink", "sinkInst1", null, 1))
+      Actor("source", "sourceInst1", null, 1, null),
+      Actor("sp", "spInst1", spParams, 240, null),
+      Actor("qammod", "qamInst1", null, 3, null),
+      Actor("zeropad", "zeropadInst1", zeropadParams, 65, null),
+      Actor("r22sdf_fft_ifft_core", "ifftInst1", ifftParams, 128, null),
+      Actor("cpadd", "cpInst1", cpParams, 129, null),
+      Actor("sink", "sinkInst1", null, 1, null))
 
     val (qam2, zeropad2, ifft2, cp2, sink2) = (
-      Actor("qammod", "qamInst2", null, 3),
-      Actor("zeropad", "zeropadInst2", zeropadParams, 65),
-      Actor("r22sdf_fft_ifft_core", "ifftInst2", ifftParams, 128),
-      Actor("cpadd", "cpInst2", cpParams, 129),
-      Actor("sink", "sinkInst2", null, 1))
+      Actor("qammod", "qamInst2", null, 3, null),
+      Actor("zeropad", "zeropadInst2", zeropadParams, 65, null),
+      Actor("r22sdf_fft_ifft_core", "ifftInst2", ifftParams, 128, null),
+      Actor("cpadd", "cpInst2", cpParams, 129, null),
+      Actor("sink", "sinkInst2", null, 1, null))
 
     val (qam3, zeropad3, ifft3, cp3, sink3) = (
-      Actor("qammod", "qamInst3", null, 3),
-      Actor("zeropad", "zeropadInst3", zeropadParams, 65),
-      Actor("r22sdf_fft_ifft_core", "ifftInst3", ifftParams, 128),
-      Actor("cpadd", "cpInst3", cpParams, 129),
-      Actor("sink", "sinkInst3", null, 1))
+      Actor("qammod", "qamInst3", null, 3, null),
+      Actor("zeropad", "zeropadInst3", zeropadParams, 65, null),
+      Actor("r22sdf_fft_ifft_core", "ifftInst3", ifftParams, 128, null),
+      Actor("cpadd", "cpInst3", cpParams, 129, null),
+      Actor("sink", "sinkInst3", null, 1, null))
 
     val (qam4, zeropad4, ifft4, cp4, sink4) = (
-      Actor("qammod", "qamInst4", null, 3),
-      Actor("zeropad", "zeropadInst4", zeropadParams, 65),
-      Actor("r22sdf_fft_ifft_core", "ifftInst4", ifftParams, 128),
-      Actor("cpadd", "cpInst4", cpParams, 129),
-      Actor("sink", "sinkInst4", null, 1))
+      Actor("qammod", "qamInst4", null, 3, null),
+      Actor("zeropad", "zeropadInst4", zeropadParams, 65, null),
+      Actor("r22sdf_fft_ifft_core", "ifftInst4", ifftParams, 128, null),
+      Actor("cpadd", "cpInst4", cpParams, 129, null),
+      Actor("sink", "sinkInst4", null, 1, null))
 
     //////////////////////////// LABELS  /////////////////////////////////
     val qamOutLabels = new java.util.HashMap[String, String]()
@@ -542,31 +543,31 @@ object IR3Apps {
     val psParams = new java.util.HashMap[String, Any]()
     psParams.put("dWidth", 22)
 
-    val (source1, cp1, fft1, zerocut1, qamdemod1, ps, sink) = (Actor("source2", "sourceInst1", sourceParams, 1),
-      Actor("cpremove", "cpInst1", cpParams, 81),
-      Actor("r22sdf_fft_ifft_core", "fftInst1", fftParams, 128),
-      Actor("zerocut", "zerocutInst1", zerocutParams, 65),
-      Actor("qamdemod", "qamdemodInst1", qamdemodParams, 3),
-      Actor("p2s", "psInst1", psParams, 240),
-      Actor("sink2", "sinkInst1", null, 1))
+    val (source1, cp1, fft1, zerocut1, qamdemod1, ps, sink) = (Actor("source2", "sourceInst1", sourceParams, 1, null),
+      Actor("cpremove", "cpInst1", cpParams, 81, null),
+      Actor("r22sdf_fft_ifft_core", "fftInst1", fftParams, 128, null),
+      Actor("zerocut", "zerocutInst1", zerocutParams, 65, null),
+      Actor("qamdemod", "qamdemodInst1", qamdemodParams, 3, null),
+      Actor("p2s", "psInst1", psParams, 240, null),
+      Actor("sink2", "sinkInst1", null, 1, null))
 
-    val (source2, cp2, fft2, zerocut2, qamdemod2) = (Actor("source2", "sourceInst2", sourceParams, 1),
-      Actor("cpremove", "cpInst2", cpParams, 81),
-      Actor("r22sdf_fft_ifft_core", "fftInst2", fftParams, 128),
-      Actor("zerocut", "zerocutInst2", zerocutParams, 65),
-      Actor("qamdemod", "qamdemodInst2", qamdemodParams, 3))
+    val (source2, cp2, fft2, zerocut2, qamdemod2) = (Actor("source2", "sourceInst2", sourceParams, 1, null),
+      Actor("cpremove", "cpInst2", cpParams, 81, null),
+      Actor("r22sdf_fft_ifft_core", "fftInst2", fftParams, 128, null),
+      Actor("zerocut", "zerocutInst2", zerocutParams, 65, null),
+      Actor("qamdemod", "qamdemodInst2", qamdemodParams, 3, null))
 
-    val (source3, cp3, fft3, zerocut3, qamdemod3) = (Actor("source2", "sourceInst3", sourceParams, 1),
-      Actor("cpremove", "cpInst3", cpParams, 81),
-      Actor("r22sdf_fft_ifft_core", "fftInst3", fftParams, 128),
-      Actor("zerocut", "zerocutInst3", zerocutParams, 65),
-      Actor("qamdemod", "qamdemodInst3", qamdemodParams, 3))
+    val (source3, cp3, fft3, zerocut3, qamdemod3) = (Actor("source2", "sourceInst3", sourceParams, 1, null),
+      Actor("cpremove", "cpInst3", cpParams, 81, null),
+      Actor("r22sdf_fft_ifft_core", "fftInst3", fftParams, 128, null),
+      Actor("zerocut", "zerocutInst3", zerocutParams, 65, null),
+      Actor("qamdemod", "qamdemodInst3", qamdemodParams, 3, null))
 
-    val (source4, cp4, fft4, zerocut4, qamdemod4) = (Actor("source2", "sourceInst4", sourceParams, 1),
-      Actor("cpremove", "cpInst4", cpParams, 81),
-      Actor("r22sdf_fft_ifft_core", "fftInst4", fftParams, 128),
-      Actor("zerocut", "zerocutInst4", zerocutParams, 65),
-      Actor("qamdemod", "qamdemodInst4", qamdemodParams, 3))
+    val (source4, cp4, fft4, zerocut4, qamdemod4) = (Actor("source2", "sourceInst4", sourceParams, 1, null),
+      Actor("cpremove", "cpInst4", cpParams, 81, null),
+      Actor("r22sdf_fft_ifft_core", "fftInst4", fftParams, 128, null),
+      Actor("zerocut", "zerocutInst4", zerocutParams, 65, null),
+      Actor("qamdemod", "qamdemodInst4", qamdemodParams, 3, null))
 
 
     //////////////////////////// LABELS  /////////////////////////////////
@@ -750,19 +751,19 @@ object IR3Apps {
     sinkParams.put("dWidth", 16)
 
     val (source, nco, mixeri, mixerq, cici1, cicq1, cfiri1, cfirq1, cici2, cicq2, cfiri2, cfirq2, sink) = (
-      Actor("source", "sourceInst", sourceParams, 5),
-      Actor("NCO", "ncoInst", ncoParams, 5),
-      Actor("mixer", "mixeriInst", mixerParams, 2),
-      Actor("mixer", "mixerqInst", mixerParams, 2),
-      Actor("CIC", "cici1Inst", cic1Params, 128),
-      Actor("CIC", "cicq1Inst", cic1Params, 128),
-      Actor("fir_par", "cfiri1Inst", cfir1Params, 1),
-      Actor("fir_par", "cfirq1Inst", cfir1Params, 1),
-      Actor("CIC", "cici2Inst", cic2Params, 4),
-      Actor("CIC", "cicq2Inst", cic2Params, 4),
-      Actor("fir_par", "cfiri2Inst", cfir2Params, 1),
-      Actor("fir_par", "cfirq2Inst", cfir2Params, 1),
-      Actor("sink", "sinkInst", sinkParams, 1))
+      Actor("source", "sourceInst", sourceParams, 5, null),
+      Actor("NCO", "ncoInst", ncoParams, 5, null),
+      Actor("mixer", "mixeriInst", mixerParams, 2, null),
+      Actor("mixer", "mixerqInst", mixerParams, 2, null),
+      Actor("CIC", "cici1Inst", cic1Params, 128, null),
+      Actor("CIC", "cicq1Inst", cic1Params, 128, null),
+      Actor("fir_par", "cfiri1Inst", cfir1Params, 1, null),
+      Actor("fir_par", "cfirq1Inst", cfir1Params, 1, null),
+      Actor("CIC", "cici2Inst", cic2Params, 4, null),
+      Actor("CIC", "cicq2Inst", cic2Params, 4, null),
+      Actor("fir_par", "cfiri2Inst", cfir2Params, 1, null),
+      Actor("fir_par", "cfirq2Inst", cfir2Params, 1, null),
+      Actor("sink", "sinkInst", sinkParams, 1, null))
 
 
     //////////////////////////// LABELS  /////////////////////////////////
@@ -866,17 +867,17 @@ object IR3Apps {
     sinkParams.put("dWidth", 16)
 
     val (source, nco, mixeri, mixerq, cici, cicq, cfiri, cfirq, pfiri, pfirq, sink) = (
-      Actor("source", "sourceInst", null, 5),
-      Actor("NCO", "ncoInst", ncoParams, 5),
-      Actor("mixer", "mixeriInst", mixerParams, 2),
-      Actor("mixer", "mixerqInst", mixerParams, 2),
-      Actor("CIC", "cici1Inst", cic1Params, 256),
-      Actor("CIC", "cicq1Inst", cic1Params, 256),
-      Actor("fir_par", "cfiri1Inst", cfir1Params, 1),
-      Actor("fir_par", "cfirq1Inst", cfir1Params, 1),
-      Actor("fir_par", "pfiriInst", cfir2Params, 1),
-      Actor("fir_par", "pfirqInst", cfir2Params, 1),
-      Actor("sink", "sinkInst", sinkParams, 1))
+      Actor("source", "sourceInst", null, 5, null),
+      Actor("NCO", "ncoInst", ncoParams, 5, null),
+      Actor("mixer", "mixeriInst", mixerParams, 2, null),
+      Actor("mixer", "mixerqInst", mixerParams, 2, null),
+      Actor("CIC", "cici1Inst", cic1Params, 256, null),
+      Actor("CIC", "cicq1Inst", cic1Params, 256, null),
+      Actor("fir_par", "cfiri1Inst", cfir1Params, 1, null),
+      Actor("fir_par", "cfirq1Inst", cfir1Params, 1, null),
+      Actor("fir_par", "pfiriInst", cfir2Params, 1, null),
+      Actor("fir_par", "pfirqInst", cfir2Params, 1, null),
+      Actor("sink", "sinkInst", sinkParams, 1, null))
 
     //////////////////////////// LABELS  /////////////////////////////////
 
@@ -955,8 +956,8 @@ object IR3Apps {
     val yParams = new java.util.HashMap[String, Any]()
     yParams.put("dWidth", 8)
 
-    val (x, y) = (Actor("x", "xInst", xParams, 3),
-      Actor("y", "yInst", yParams, 5))
+    val (x, y) = (Actor("x", "xInst", xParams, 3, null),
+      Actor("y", "yInst", yParams, 5, null))
 
     val ch1 = Channel[Actor](x, y, "xInst_yInst_ch1",
       KernelPort(2, List((1, "011")), null),

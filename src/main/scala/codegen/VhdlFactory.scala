@@ -1,4 +1,4 @@
-package sdrlift.codegen.vhdl
+package codegen
 
 import sdrlift.model.Actor
 
@@ -271,13 +271,17 @@ case class VhdlFactory(template: String) {
   def getPortLabel(signal: String, labels: java.util.HashMap[String, String], label: String): String = {
     val l = labels.find(_._1.equalsIgnoreCase(label))
     val m = labels.find(_._2.equalsIgnoreCase(signal))
-    if (l != None)
+
+    val pl =
+      if (l != None)
       l.get._1
     else if (m != None) //if(label.equalsIgnoreCase(signal))
       m.get._1
     else {
       "open"
     }
+
+    pl
   }
 
 
